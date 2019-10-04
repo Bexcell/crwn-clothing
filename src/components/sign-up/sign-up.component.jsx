@@ -1,13 +1,13 @@
-import Recat from "react";
+import React from "react";
 
 import FormInput from "../form-input/form-input.component";
-import customButton from "../custom-button/custom-button.component";
+import CustomButton from "../custom-button/custom-button.component";
 
 import { auth, createUserProfileDocument } from "../../firebase/firebase.utils";
 
 import "./sign-up.styles.scss";
 
-class signUp extends React.Component {
+class SignUp extends React.Component {
   constructor() {
     super();
 
@@ -24,18 +24,17 @@ class signUp extends React.Component {
 
     const { displayName, email, password, confirmPassword } = this.state;
 
-    if (password != confirmPassword) {
+    if (password !== confirmPassword) {
       alert("passwords don't match");
       return;
     }
 
     try {
-      const {
-        user
-      } = await auth.createUserWithEmailAndPasswordEmailAndPassword(
+      const { user } = await auth.createUserWithEmailAndPassword(
         email,
         password
       );
+
       await createUserProfileDocument(user, { displayName });
 
       this.setState({
@@ -59,8 +58,8 @@ class signUp extends React.Component {
     const { displayName, email, password, confirmPassword } = this.state;
     return (
       <div className="sign-up">
-        <h2 className="title">I do not have an account </h2>
-        <span>Sign up with your email password</span>
+        <h2 className="title">I do not have a account</h2>
+        <span>Sign up with your email and password</span>
         <form className="sign-up-form" onSubmit={this.handleSubmit}>
           <FormInput
             type="text"
@@ -94,11 +93,11 @@ class signUp extends React.Component {
             label="Confirm Password"
             required
           />
-          <CustomButton type="submit"> SIGN UP </CustomButton>
+          <CustomButton type="submit">SIGN UP</CustomButton>
         </form>
       </div>
     );
   }
 }
 
-export default signUp;
+export default SignUp;
